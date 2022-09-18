@@ -1,0 +1,337 @@
+h1{
+    font-family: 'SF UI Text';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: calc(38rem/16);
+    color: #0A4874;
+}
+.body-intro .mobile {
+   display: none;
+}
+.body-intro-content {
+    position: absolute;
+    top: 89px;
+    max-width: 48%;
+    padding-left: 8vw;
+    padding-top: 3vw;
+    color: #FFFFFF;
+    line-height: 1.7rem;
+}
+.body-intro-content > h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 3rem;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.body-intro-content > p {  
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.7rem;
+}
+
+.body-intro-content li {
+    list-style: none;
+}
+
+/*         */
+/* Reasons */
+/*         */
+
+.body-reasons {
+    width: 100%;
+    padding: 3rem 5rem;
+    margin: auto;
+    background: #F5F5F5;
+}
+
+
+.body-reasons-header h1 {
+    padding-left: 1rem;
+}
+
+
+
+.body-reasons-reasons {
+    display: flex;
+    
+    justify-content: center;
+}
+
+.body-reasons-reason {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 8px;
+    width: calc(370rem/16);
+    /* height: calc(307rem/16); */
+    margin-top: calc(92rem/16);
+    padding-bottom: 1rem;
+  
+}
+
+
+
+.body-reasons-nextprev {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.06);
+    height: calc(40rem/16);
+    width: calc(40rem/16);
+    padding: calc(20rem/16);
+    text-align: center;
+    /* text-decoration: none; */
+    border-radius: 50%;
+    margin-top: calc(60rem/16);
+    align-self: center;
+    background-image: url('../../images/Arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.body-reasons-nextprev :hover {
+    cursor: pointer;
+    background: #0A4874;
+}
+
+.reason-icon {
+    width: calc(100rem/16);
+    height: calc(100rem/16);
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.06);
+    margin: auto;
+    border-radius: 73px;
+    position: relative;
+    top: calc(-50rem/16);
+    background: #ffffff;
+    display: flex;
+}
+
+.reason-icon >img {
+    margin: auto;
+}
+
+.reason-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.reason-content>hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: #D8D8D8;
+    height: 1px;
+}
+
+.reason-content-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: calc(24rem/16);
+    line-height: 150%;
+    color: #0A4874;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: center;
+    height: calc(68rem/16);
+    overflow: hidden
+    
+}
+.reason-content-main {
+    text-align: left;
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(18rem/16);
+    line-height: 150%;
+    /* or 150% */
+
+
+color: #232020;
+}
+
+
+
+/* Guide */
+
+.body-guide {
+    width: 100%;
+    /* height: 300px;
+    background-color: #0A4874; */
+    padding: 3rem 7rem;
+}
+
+.body-guide-container {
+
+}
+
+.guide-title {
+    display: flex;
+}
+
+
+.guide-title ul {
+    display: flex;
+    list-style: none;
+    margin-left: calc(120rem/16);
+    align-items: center;
+}
+.guide-title li {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #D8D8D8;
+    cursor: pointer;
+}
+
+.guide-title li[choosed] {
+    text-decoration: underline #237BD3 3px;
+    color: #020202;
+    font-weight: 700;
+}
+.guide-steps{
+    display: flex;
+    justify-content: space-between;
+}
+
+.guide-steps-text {
+    max-width: 45%;
+    width: fit-content;
+    margin-right: 3rem;
+}
+.guide-steps-step {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: -webkit-inline-box;
+}
+.step-order {
+    height: calc(40rem/16);
+    width: calc(40rem/16);
+    background: #C6EFFF;
+    border: 1px solid #237BD3;
+    border-radius: 60px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size:calc(24rem/16);
+    line-height: calc(29rem/16);
+    color: #237BD3;
+}
+
+.step-content {
+    /* display: inline-block; */
+    margin-left: 1rem;
+}
+.step-order:hover {
+    cursor: pointer;
+}
+.step-content:hover{
+    cursor: pointer;
+}
+.step-order[choosed] {
+    background: #237BD3;
+    color: #FFFFFF;
+}
+.step-content[choosed] {
+    font-weight: 600;
+    color: #237BD3;
+}
+
+
+.guide-steps-img {
+
+    width: 358px;
+    height: 680px;
+    background-color: #E0E0E0;
+}
+
+
+/* Question */
+
+.body-question {
+    background: #F5F5F5;
+    width: 100%;
+    padding: 3rem 7rem;
+}
+
+.question-container {
+
+    width: calc(856rem/16);
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.06);
+    padding: calc(24rem/16);
+    margin-top: 20px;
+}
+.question-q {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  
+}
+.question-q p{
+    font-style: normal;
+    font-weight: 600;
+    font-size: calc(18rem/16);
+    line-height: calc(27rem/16);
+    color: #232020;
+    cursor: pointer;
+}
+.question-a[hidden] {
+    display: none;
+}
+
+.question-a hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: #D8D8D8;
+    height: 1px;
+}
+.question-a h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: calc(18rem/16);
+    line-height: calc(27rem/16);
+    color: #237BD3;
+}
+.question-a p {
+    margin-top: calc(6rem/16);
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(18rem/16);
+    line-height: calc(27rem/16);
+    color: #232020;
+}
+@media screen and (max-width: 760px) {
+
+    .body-intro .pc {
+        display: none;
+    }
+    .body-intro .mobile {
+        display: block;
+   
+    }
+    .body-intro-content {
+        max-width: 100%;
+        padding-right: 8vw;
+        padding-top: 8vh;
+       
+    }
+    .body-intro-content > p , li {
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .body-intro-content img {
+        margin: 1rem auto auto auto;
+    }
+    .body-reasons-nextprev {
+        display: none;
+    }
+}
