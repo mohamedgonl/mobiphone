@@ -115,6 +115,8 @@ h1{
 
 .reason-icon >img {
     margin: auto;
+    width: 60%;
+    height: 60%;
 }
 
 .reason-content {
@@ -165,9 +167,9 @@ color: #232020;
     padding: 3rem 7rem;
 }
 
-.body-guide-container {
+/* .body-guide-container {
 
-}
+} */
 
 .guide-title {
     display: flex;
