@@ -1,5 +1,6 @@
 import '../style.css'
 import React from 'react';
+import {useState} from 'react'
 import icon1 from '../../../images/icon1.svg'
 import icon2 from '../../../images/icon2.svg'
 import icon3 from '../../../images/icon3.svg'
@@ -18,11 +19,35 @@ var reasons = [{
     icon: icon3,
     title: 'Mạng di động Nhanh - Ổn định - Khắp mọi nơi',
     content: 'Trải nghiệm eSIM Viettel với tốc độ mạng 3G/4G nhanh và ổn định, cùng dịch vụ chăm sóc khách hàng hoàn hảo 24/7.'
+},
+{
+    icon: icon1,
+    title: 'Test1',
+    content: 'Test1'
+},
+{
+    icon: icon1,
+    title: 'Test2',
+    content: 'Test2'
+},
+{
+    icon: icon1,
+    title: 'Test3',
+    content: 'Test3'
+},
+{
+    icon: icon1,
+    title: 'Test4',
+    content: 'Test4'
 }]
 
 const Reasons = () => {
 
-    
+
+    const changeReasonsShowing = (i) => {
+        let listReasons = document.querySelector(".body-reasons-list")
+        listReasons.scrollBy({left: i, top: 0, behavior: "smooth"});
+    }
     
     const Reason = (title,content,icon) => {
         return(
@@ -45,10 +70,11 @@ const Reasons = () => {
            
              
             <div className='body-reasons-reasons'>
-               <button className='body-reasons-nextprev' >
+               <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(-350)}>
                </button>
-                {reasons.map(e => Reason(e.title,e.content, e.icon))}
-                <button className='body-reasons-nextprev'  style={{transform: 'rotate(0.5turn)'}}></button>
+               <div className='body-reasons-list'>{reasons.map(e => Reason(e.title, e.content, e.icon))}</div>
+                
+                <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(350)}  style={{transform: 'rotate(0.5turn)'}}></button>
              </div>
            
           

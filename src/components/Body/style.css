@@ -1,3 +1,5 @@
+
+
 h1{
     font-family: 'SF UI Text';
     font-style: normal;
@@ -61,16 +63,25 @@ h1{
     
     justify-content: center;
 }
+.body-reasons-list {
+    overflow-y: scroll;
+    display: flex;
+    max-width: calc(1200rem/16);
+    height: auto;
+    overflow: scroll;
+
+}
+
 
 .body-reasons-reason {
     background: #FFFFFF;
     border: 1px solid #E0E0E0;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
+    /* box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06); */
     margin-left: 1rem;
     margin-right: 1rem;
     border-radius: 8px;
-    width: calc(370rem/16);
-    /* height: calc(307rem/16); */
+    min-width: calc(370rem/16);
+    min-height: calc(307rem/16);
     margin-top: calc(92rem/16);
     padding-bottom: 1rem;
   
@@ -95,9 +106,9 @@ h1{
     background-position: center;
 }
 
-.body-reasons-nextprev :hover {
+.body-reasons-nextprev:hover {
     cursor: pointer;
-    background: #0A4874;
+    background-color: #eef6ff;
 }
 
 .reason-icon {
@@ -203,6 +214,8 @@ color: #232020;
     max-width: 45%;
     width: fit-content;
     margin-right: 3rem;
+    display: flex;
+    flex-direction: column;
 }
 .guide-steps-step {
     margin-top: 1rem;
@@ -225,19 +238,32 @@ color: #232020;
     line-height: calc(29rem/16);
     color: #237BD3;
 }
+.step-order:hover {
+    cursor: pointer;
+}
+
+.step-order[os] {
+    background: #FFFFFF;
+    border: 1.4px solid #E0E0E0;
+    border-radius: 16px;
+    cursor: default;
+}
+
 
 .step-content {
     /* display: inline-block; */
     margin-left: 1rem;
 }
-.step-order:hover {
-    cursor: pointer;
-}
+
 .step-content:hover{
     cursor: pointer;
 }
+.step-content[os] {
+    cursor: default;
+}
+
 .step-order[choosed] {
-    background: #237BD3;
+    background-color: #237BD3;
     color: #FFFFFF;
 }
 .step-content[choosed] {
@@ -264,7 +290,8 @@ color: #232020;
 
 .question-container {
 
-    width: calc(856rem/16);
+    /* width: calc(856rem/16); */
+    width: 100%;
     border-radius: 8px;
     background: #FFFFFF;
     border: 1px solid #E0E0E0;
@@ -333,7 +360,33 @@ color: #232020;
     .body-intro-content img {
         margin: 1rem auto auto auto;
     }
+    .body-reasons {
+        padding: 3rem 2rem;
+    }
     .body-reasons-nextprev {
         display: none;
     }
+
+    .guide-title {
+        flex-direction: column;
+    }
+    .guide-title ul {
+        margin-left: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        justify-content: space-evenly;
+    }
+    .guide-steps {
+        flex-direction: column;
+    }
+    .guide-steps-text {
+        max-width: 90%;
+    }
+    .guide-steps-img {
+        align-self: center;
+    }
 }
+
+
+
+

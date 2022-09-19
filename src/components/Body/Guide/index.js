@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style.css'
-import './styletest.css'
+import android from '../../../images/Android.svg'
 const guides = [{i: 1, content: 'Trong mục cài đặt (Settings), Chọn kết nối (Connection)'},
 {
     i: 2, content: 'Chọn quản lý Sim (Sim card manager) và chọn thêm gói di động (Add mobile plan)'
@@ -27,8 +27,8 @@ const guides = [{i: 1, content: 'Trong mục cài đặt (Settings), Chọn kế
 const Step = (i, content) => {
     return (
         <div className='guide-steps-step'>
-            <div className='step-order' choosed >{i}</div>
-            <div className='step-content'>{content}</div>
+            <div className='step-order' choosed="" >{i}</div>
+            <div className='step-content' choosed>{content}</div>
         </div>
     )
 }
@@ -45,19 +45,25 @@ const SlideShow = () => {
 
 const Guide = () => {
     return (
-        <div className='body-guide'>
+        <div className='body-guide' id='guide'>
            <div className='body-guide-container'>
                 <div className='guide-title'>
                     <h1>Hướng dẫn kích hoạt eSIM</h1>
                     <ul>
                         <li>IOS</li>
-                        <li choosed = {true} >ANDROID</li>
+                        <li  >ANDROID</li>
                     </ul>
                 </div>
                 <div className='guide-steps'>
                     <div className='guide-steps-text'>
-                        <h2>Đối với Android</h2>
-                        <p>Lưu ý: Bật kết nối Internet trước khi thao tác</p>
+                        <div className='guide-steps-step'>
+                            <img className='guide-steps-os step-order' os="" src={android}></img>
+                            <div className='step-content' os="" >
+                                <h2>Đối với Android</h2>
+                                <p>Lưu ý: Bật kết nối Internet trước khi thao tác</p>
+                            </div>
+                        </div>
+                        
                         {guides.map(e => Step(e.i,e.content))}
                     </div>
                     <div className='guide-steps-img'>

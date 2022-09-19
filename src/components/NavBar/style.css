@@ -53,6 +53,7 @@ nav a:hover {
 
 
 
+
 @media screen and (max-width: 760px) {
     .header-container {
         flex-direction: column;
@@ -72,7 +73,7 @@ nav a:hover {
 
     .header-container nav {
         z-index: 1;
-        visibility: hidden;
+        visibility: visible;
         position: absolute;
         top: calc(90px + 1rem);
         left: 0px;
@@ -99,4 +100,11 @@ nav a:hover {
     }
 
 
+}
+
+
+@media screen and (min-width: 760px) {
+    .header-container nav {
+        display: block;
+    }
 }

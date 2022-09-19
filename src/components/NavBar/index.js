@@ -12,13 +12,13 @@ const Header = () => {
         var body = document.querySelector('.body-content').style;
         console.log(body);
         if(navBarShowed) {
-            menu.visibility = 'hidden';
+            // menu.visibility = 'hidden';
             body['pointer-events'] = 'all';
             body['opacity'] = 1;
             setNavBarShowed(false);
         }
         else {
-            menu.visibility = '';
+            // menu.visibility = 'visibile';
             body['pointer-events'] = 'none';
             body['opacity'] = 0.5;
             setNavBarShowed(true);
@@ -42,10 +42,13 @@ const Header = () => {
                             <a className='nav-link' href='#'>Giới thiệu eSim</a>
                         </li>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#'>Hướng dẫn kích hoạt</a>
+                            <a className='nav-link' href='#guide'>Hướng dẫn kích hoạt</a>
                         </li>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#'>Câu hỏi thường gặp</a>
+                            <a className='nav-link' href='#'>Hướng dẫn</a>
+                        </li>
+                        <li className='nav-list-item'>
+                            <a className='nav-link' href='#questions'>Câu hỏi thường gặp</a>
                         </li>
                     </ul>
                 </nav>
