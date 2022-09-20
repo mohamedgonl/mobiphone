@@ -103,8 +103,8 @@ nav a:hover {
 }
 
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 1280px) {
     .header-container nav {
-        display: block;
+        visibility: visible;
     }
 }

@@ -12,13 +12,13 @@ const Header = () => {
         var body = document.querySelector('.body-content').style;
         console.log(body);
         if(navBarShowed) {
-            // menu.visibility = 'hidden';
+            menu.visibility = 'hidden';
             body['pointer-events'] = 'all';
             body['opacity'] = 1;
             setNavBarShowed(false);
         }
         else {
-            // menu.visibility = 'visibile';
+            menu.visibility = 'visibile';
             body['pointer-events'] = 'none';
             body['opacity'] = 0.5;
             setNavBarShowed(true);
