@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import "../style.css";
 import android from "../../../images/Android.svg";
 
-// import img1 from "../../../images/img1.jpg";
+import img1 from "../../../images/img1.jpg";
 // import img2 from "../../../images/img2.jpg";
 // import img3 from "../../../images/img3.jpg";
 // import img4 from "../../../images/img4.jpg";
@@ -64,7 +64,7 @@ const Step = (i, content) => {
 const SlideShow = () => {
     const [slideIndex, setSlideIndex] = useState(1);
 
-    const showSlides = (n) => {
+    const showSlide = (n) => {
     let slides = document.querySelectorAll(".slide");
     let dots = document.querySelectorAll(".dot");
 
@@ -84,22 +84,23 @@ const SlideShow = () => {
   };
 
   const plusSlides = (n) => {
-    showSlides(slideIndex + n);
+    showSlide(slideIndex + n);
     setSlideIndex(slideIndex+n);
   }
 
   const currentSlide = (n) => {
-    showSlides(slideIndex - n);
+    showSlide(slideIndex - n);
     setSlideIndex(slideIndex - n);
   }
 
 //   useEffect(() => {
-//     showSlides(slideIndex);
-//   }, [slideIndex]);
+//     showSlide(slideIndex);
+//   }, [1]);
 
   const Slide = (imgUrl) => {
+    console.log('call');
         <div className="slide fade">
-          <img alt="Guide" src={imgUrl} style={{ width: "100%" }}></img>
+          <img alt="Guide" src={img1} style={{ width: "100%" }}></img>
           {/* <div className="text">Caption Text</div> */}
         </div>
   }
