@@ -60,25 +60,25 @@ var questions = [
     questions: '15. Có thể quét 1 QR code cho 2 thiết bị được không?',
     answer: '15'
 },
-// {
-//     questions: '16. Có thể quét 1 QR code cho 2 thiết bị được không?',
-//     answer: '16'
-// },
-// {
-//     questions: '17. Có thể quét 1 QR code cho 2 thiết bị được không?',
-//     answer: '17'
-// },
+{
+    questions: '16. Có thể quét 1 QR code cho 2 thiết bị được không?',
+    answer: '16'
+},
+{
+    questions: '17. Có thể quét 1 QR code cho 2 thiết bị được không?',
+    answer: '17'
+},
 ]
 
 const Question = (ques,ans) => {
     const [hiddenAns, setHiddenAns] = useState(true);
     const showAns = () => {
-        hiddenAns == true? setHiddenAns(false): setHiddenAns(true)
+        hiddenAns === true? setHiddenAns(false): setHiddenAns(true)
     }   
     return(
     <div className='question-container' id='questions'>
         <div className='question-q'>
-            <input onClick={showAns} type={'image'} src={button} style={{width: '16px', height: '9px', margin: 'auto 0', marginLeft: '1rem'}}></input>
+            <input alt='show' onClick={showAns} type={'image'} src={button} style={{width: '16px', height: '9px', margin: 'auto 0', marginLeft: '1rem'}}></input>
             <p onClick={showAns} >{ques}</p>
         </div>
     
@@ -92,14 +92,14 @@ const Question = (ques,ans) => {
     )
 }
 
-
     const maxQuestionPerPage = 5;
     const pageStart = 1;
-    const pageCount = Math.ceil(questions.length/maxQuestionPerPage);
+    const pageCount = Math.ceil(questions.length/maxQuestionPerPage); 
 
     const getQuestions = (page) => {
         let start = (page-1)*maxQuestionPerPage;
         let end = (start + maxQuestionPerPage -1) >= (questions.length) ? questions.length: (start + maxQuestionPerPage);
+        console.log(start);
         let q = [];
         for(let i = start; i<end; i++) {
             q.push(questions[i]);
@@ -108,10 +108,11 @@ const Question = (ques,ans) => {
         return q;
     }
 
+
 const Questions = () => {
-    
 
 
+   
 
 
     const [curPage, setCurPage] = useState(pageStart);
@@ -119,27 +120,21 @@ const Questions = () => {
     
 
 
+    
+
     const navigatePage = (event, page) => {
-        console.log(page);
         setCurPage(page)
-        // setQuestionShowing(getQuestions(page))
-        setQuestionShowing([
-            {
-    questions: '16. Có thể quét 1 QR code cho 2 thiết bị được không?',
-    answer: '16'
-},
-{
-    questions: '17. Có thể quét 1 QR code cho 2 thiết bị được không?',
-    answer: '17'
-},
-        ])     
+        setQuestionShowing(getQuestions(page))    
     }
 
 
     return (
         <div className='body-question'>
                 <h1>Câu hỏi thường gặp</h1>
-                {questionShowing.map(e => Question(e.questions,e.answer))}
+                <div>
+                    {questionShowing.map(e => Question(e.questions,e.answer))}
+                </div>
+                
                 <div className='questions-navigate' style={{display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
                     <Pagination onChange={navigatePage} count={pageCount} page={curPage}  shape='rounded' ></Pagination>
                 </div>
