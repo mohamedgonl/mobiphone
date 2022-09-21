@@ -1,17 +1,15 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "../style.css";
 import android from "../../../images/Android.svg";
 
 import img1 from "../../../images/img1.jpg";
-// import img2 from "../../../images/img2.jpg";
-// import img3 from "../../../images/img3.jpg";
-// import img4 from "../../../images/img4.jpg";
+import img2 from "../../../images/img2.jpg";
+import img3 from "../../../images/img3.jpg";
+import img4 from "../../../images/img4.jpg";
+import img5 from "../../../images/img5.jpg";
 import "./slideshow.style.css";
 
-
-const slideImages = ["../../../images/img1.jpg", "../../../images/img2.jpg","../../../images/img3.jpg", "../../../images/img4.jpg"]
-
-
+const slideImages = [img1,img2,img3,img4,img5];
 
 const guides = [
   { i: 1, content: "Trong mục cài đặt (Settings), Chọn kết nối (Connection)" },
@@ -49,8 +47,9 @@ const guides = [
 ];
 
 const Step = (i, content) => {
+  
   return (
-    <div className="guide-steps-step">
+    <div className="guide-steps-step" onClick={()=>currentSlide(i)}>
       <div className="step-order" choosed="">
         {i}
       </div>
@@ -61,76 +60,87 @@ const Step = (i, content) => {
   );
 };
 
-const SlideShow = () => {
-    const [slideIndex, setSlideIndex] = useState(1);
+// Slide show function
+var slideIndex = 1;
 
-    const showSlide = (n) => {
-    let slides = document.querySelectorAll(".slide");
-    let dots = document.querySelectorAll(".dot");
+const showSlide = (n) => {
+  let dots = document.querySelectorAll(".dot")
+  let slides = document.querySelectorAll(".slide")
 
-    if (n > slides.length) setSlideIndex(1);
-
-    if (n < 1) setSlideIndex(slides.length);
-
+  if(slides.length && dots.length) {
+    if (n > slides.length) {slideIndex = 1} 
+    if (n < 1) {slideIndex = slides.length}
     for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
     }
     for (let i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
     }
-
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
+  }
+};
+
+const plusSlides = (n) => {
+  showSlide(slideIndex += n);
+};
+
+const currentSlide = (n) => {
+  showSlide(slideIndex = n);
+};
+// 
+
+//  Slideshow component
+const SlideShow = () => {
+  
+  const Slide = (imgUrl) => {
+    return (
+    <div className="slide fade" >
+      <img alt="Guide"  src={imgUrl} style={{ width: "100%" }}></img>
+      {/* <div className="text">Caption Text {i}</div> */}
+    </div>
+    )
   };
 
-  const plusSlides = (n) => {
-    showSlide(slideIndex + n);
-    setSlideIndex(slideIndex+n);
-  }
-
-  const currentSlide = (n) => {
-    showSlide(slideIndex - n);
-    setSlideIndex(slideIndex - n);
-  }
-
-//   useEffect(() => {
-//     showSlide(slideIndex);
-//   }, [1]);
-
-  const Slide = (imgUrl) => {
-    console.log('call');
-        <div className="slide fade">
-          <img alt="Guide" src={img1} style={{ width: "100%" }}></img>
-          {/* <div className="text">Caption Text</div> */}
-        </div>
-  }
-
-  const Dot = (index) => {
+  const Dot = (i) => {
     return (
-        <span className="dot" onClick={() => currentSlide(index+1)}></span>
-    )
-  }
+      <span className="dot" onClick={() => currentSlide(i+1)}></span>
+    );
+  };
+
+
+  useEffect(()=>{
+    showSlide(1)
+  })
 
   return (
-    <div className="slide-show">
-      <div className="slideshow-container">
-            {slideImages.map((e)=>Slide(e))}
-      </div>
+    <>
       <a className="prev" onClick={() => plusSlides(-1)}>
         &#10094;
       </a>
-      <a className="next" onClick={() => plusSlides(1)}>
-        &#10095;
-      </a>
+    <div className="slide-show">
+      <div className="slideshow-container">
+        {slideImages.map((img,i)=>Slide(img))}
+      </div>
       <br></br>
 
       <div style={{ textAlign: "center" }}>
-        {slideImages.map((e,i)=>Dot(i))}
+        {slideImages.map((e, i) => Dot(i))}
       </div>
     </div>
+      <a className="next" onClick={() => plusSlides(1)}>
+        &#10095;
+      </a>
+    </>
   );
 };
 
+
+
+
+
+
+// Entry Guide start
 const Guide = () => {
   return (
     <div className="body-guide" id="guide">
@@ -157,7 +167,7 @@ const Guide = () => {
               </div>
             </div>
 
-            {guides.map((e) => Step(e.i, e.content))}
+            {guides.map((e,i) => Step(i+1, e.content))}
           </div>
           <div className="guide-steps-img">
             <SlideShow></SlideShow>

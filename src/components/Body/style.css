@@ -276,6 +276,8 @@ color: #232020;
 
     width: 358px;
     height: 680px;
+    display: flex;
+    align-items: center;
     /* background-color: #E0E0E0; */
 }
 

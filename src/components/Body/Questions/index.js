@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useState} from 'react'
 import Pagination from '@mui/material/Pagination';
 import '../style.css'
 import button from '../../../images/Path.svg'
+
 var questions = [
 {
     questions: '1. Tại 1 thời điểm khách hàng sử dụng được bao nhiêu số thuê bao trên eSIM?',
@@ -70,10 +71,13 @@ var questions = [
 },
 ]
 
+
+
+
 const Question = (ques,ans) => {
     const [hiddenAns, setHiddenAns] = useState(true);
     const showAns = () => {
-        hiddenAns === true? setHiddenAns(false): setHiddenAns(true)
+        setHiddenAns(!hiddenAns)
     }   
     return(
     <div className='question-container' id='questions'>
@@ -92,41 +96,25 @@ const Question = (ques,ans) => {
     )
 }
 
-    const maxQuestionPerPage = 5;
-    const pageStart = 1;
-    const pageCount = Math.ceil(questions.length/maxQuestionPerPage); 
 
-    const getQuestions = (page) => {
-        let start = (page-1)*maxQuestionPerPage;
-        let end = (start + maxQuestionPerPage -1) >= (questions.length) ? questions.length: (start + maxQuestionPerPage);
-        console.log(start);
-        let q = [];
-        for(let i = start; i<end; i++) {
-            q.push(questions[i]);
-        }
-        console.log({q,start, end});
-        return q;
-    }
+
+const maxQuestionPerPage = 5;
+const pageStart = 1;
+const pageCount = Math.ceil(questions.length/maxQuestionPerPage); 
+
 
 
 const Questions = () => {
-
-
-   
-
-
+    
+    const [questionShowing, setQuestionShowing] = useState([...getQuestions(pageStart)]);
     const [curPage, setCurPage] = useState(pageStart);
-    const [questionShowing, setQuestionShowing] = useState(getQuestions(pageStart));
     
-
-
-    
-
     const navigatePage = (event, page) => {
         setCurPage(page)
-        setQuestionShowing(getQuestions(page))    
+        setQuestionShowing(getQuestions(page))  
     }
 
+    console.log(questionShowing);
 
     return (
         <div className='body-question'>
@@ -141,5 +129,19 @@ const Questions = () => {
         </div>
     );
 }
+
+
+ function getQuestions(page){
+    let start = (page-1)*maxQuestionPerPage;
+    let end = (start + maxQuestionPerPage -1) >= (questions.length) ? questions.length: (start + maxQuestionPerPage);
+    end--;
+    let q = [];
+    for(let i = start; i<=end; i++) {
+        q.push(questions[i]);
+    }
+    console.log({q,start, end});
+    return q;
+}
+
 
 export default Questions;
