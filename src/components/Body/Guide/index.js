@@ -47,13 +47,15 @@ const guides = [
 ];
 
 const Step = (i, content) => {
-  
+  const currentStep = () => {
+    currentSlide(i);
+  }
   return (
-    <div className="guide-steps-step" onClick={()=>currentSlide(i)}>
+    <div className="guide-steps-step" onClick={currentStep} >
       <div className="step-order" choosed="">
         {i}
       </div>
-      <div className="step-content" choosed>
+      <div className="step-content" choosed="">
         {content}
       </div>
     </div>
@@ -125,7 +127,7 @@ const SlideShow = () => {
       <br></br>
 
       <div style={{ textAlign: "center" }}>
-        {slideImages.map((e, i) => Dot(i))}
+        {slideImages.map((_, i) => Dot(i))}
       </div>
     </div>
       <a className="next" onClick={() => plusSlides(1)}>
