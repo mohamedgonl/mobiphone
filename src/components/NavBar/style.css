@@ -88,13 +88,12 @@ nav a:hover {
         padding-top: 32px;
     }
     nav li {
-        padding: 24px;
         font-weight: 500;
         font-family: 'SF UI Display';
         margin: 0;
     }
 
-    nav li:hover{
+    .nav-list li:hover{
         border-left: solid #237BD3;
         border-width: 4px;
     }
