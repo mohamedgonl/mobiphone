@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../style.css";
 import android from "../../../images/Android.svg";
-
+import ios from "../../../images/Ios.svg";
 import img1 from "../../../images/img1.jpg";
 import img2 from "../../../images/img2.jpg";
 import img3 from "../../../images/img3.jpg";
@@ -9,9 +9,9 @@ import img4 from "../../../images/img4.jpg";
 import img5 from "../../../images/img5.jpg";
 import "./slideshow.style.css";
 
-const slideImages = [img1,img2,img3,img4,img5];
+const slideImages = [img1,img2,img3,img4,img5,img1,img2,img3];
 
-const guides = [
+const guideSteps = [
   { i: 1, content: "Trong mục cài đặt (Settings), Chọn kết nối (Connection)" },
   {
     i: 2,
@@ -46,16 +46,24 @@ const guides = [
   },
 ];
 
-const Step = (i, content) => {
-  const currentStep = () => {
+const Step = (i, content, choosed, setStepChoosed) => {
+
+  const chooseStep = () => {
+    let stepChoosed = new Array(guideSteps.length).fill(false);
+    stepChoosed[i-1] = true;
+    setStepChoosed(stepChoosed)
+  }
+
+  const onChangeStep = () => {
     currentSlide(i);
+    chooseStep();
   }
   return (
-    <div className="guide-steps-step" onClick={currentStep} >
-      <div className="step-order" choosed="">
+    <div className="guide-steps-step" onClick={onChangeStep} choosed={choosed?"true":"false"}>
+      <div className="step-order" >
         {i}
       </div>
-      <div className="step-content" choosed="">
+      <div className="step-content">
         {content}
       </div>
     </div>
@@ -93,31 +101,45 @@ const currentSlide = (n) => {
 // 
 
 //  Slideshow component
-const SlideShow = () => {
+const SlideShow = ({setStepChoosed}) => {
+  
+  const handleClickPreNext = (plus) => {
+    plusSlides(plus)
+    let stepChoosed = new Array(guideSteps.length).fill(false);
+    stepChoosed[slideIndex-1] = true;
+    setStepChoosed(stepChoosed)
+  }
   
   const Slide = (imgUrl) => {
     return (
-    <div className="slide fade" >
+      <div className="slide fade" >
       <img alt="Guide"  src={imgUrl} style={{ width: "100%" }}></img>
       {/* <div className="text">Caption Text {i}</div> */}
     </div>
     )
   };
-
+  
   const Dot = (i) => {
+    const onChangeDot = () => {
+      currentSlide(i+1);
+      let stepChoosed = new Array(guideSteps.length).fill(false);
+      stepChoosed[i] = true;
+      setStepChoosed(stepChoosed)
+    }
     return (
-      <span className="dot" onClick={() => currentSlide(i+1)}></span>
-    );
-  };
-
-
-  useEffect(()=>{
-    showSlide(1)
-  })
-
+      <span className="dot" onClick={()=>onChangeDot()}></span>
+      );
+    };
+    
+    
+    useEffect(()=>{
+      showSlide(1)
+    })
+    
+ 
   return (
     <>
-      <a className="prev" onClick={() => plusSlides(-1)}>
+      <a className="prev" onClick={()=>handleClickPreNext(-1)}>
         &#10094;
       </a>
     <div className="slide-show">
@@ -130,7 +152,7 @@ const SlideShow = () => {
         {slideImages.map((_, i) => Dot(i))}
       </div>
     </div>
-      <a className="next" onClick={() => plusSlides(1)}>
+      <a className="next" onClick={()=>handleClickPreNext(1)}>
         &#10095;
       </a>
     </>
@@ -143,15 +165,23 @@ const SlideShow = () => {
 
 
 // Entry Guide start
-const Guide = () => {
+const Guide = () => { 
+  const [stepChoosed, setStepChoosed] = useState([]);
+  const [os, setOs] = useState('Android');
+  useEffect(()=>{
+    let stepChoosed = new Array(guideSteps.length).fill(false);
+    stepChoosed[0] = true;
+    setStepChoosed(stepChoosed)
+  },[])
+
   return (
     <div className="body-guide" id="guide">
       <div className="body-guide-container">
         <div className="guide-title">
           <h1>Hướng dẫn kích hoạt eSIM</h1>
           <ul>
-            <li>IOS</li>
-            <li>ANDROID</li>
+            <li choosed = {os=='Android'?'false':'true'} onClick = {()=>setOs('IOS')}>IOS</li>
+            <li choosed = {os=='Android'?'true':'false'} onClick = {()=> setOs('Android')}>ANDROID</li>
           </ul>
         </div>
         <div className="guide-steps">
@@ -161,18 +191,18 @@ const Guide = () => {
                 className="guide-steps-os step-order"
                 alt="os"
                 os=""
-                src={android}
+                src={os == 'Android' ? android: ios}
               ></img>
               <div className="step-content" os="">
-                <h2>Đối với Android</h2>
+                <h2>Đối với {os}</h2>
                 <p>Lưu ý: Bật kết nối Internet trước khi thao tác</p>
               </div>
             </div>
 
-            {guides.map((e,i) => Step(i+1, e.content))}
+            {guideSteps.map((e,i) => Step(i+1, e.content, stepChoosed[i], setStepChoosed))}
           </div>
           <div className="guide-steps-img">
-            <SlideShow></SlideShow>
+            <SlideShow setStepChoosed = {setStepChoosed}></SlideShow>
           </div>
         </div>
       </div>

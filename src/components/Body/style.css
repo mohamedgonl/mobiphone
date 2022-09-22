@@ -200,7 +200,7 @@ color: #232020;
     cursor: pointer;
 }
 
-.guide-title li[choosed] {
+.guide-title li[choosed='true'] {
     text-decoration: underline #237BD3 3px;
     color: #020202;
     font-weight: 700;
@@ -243,6 +243,10 @@ color: #232020;
 }
 
 .step-order[os] {
+    height: calc(50rem/16);
+    width: calc(50rem/16);
+    margin-left: -0.5rem;
+    padding: 0.5rem;
     background: #FFFFFF;
     border: 1.4px solid #E0E0E0;
     border-radius: 16px;
@@ -262,11 +266,11 @@ color: #232020;
     cursor: default;
 }
 
-.step-order[choosed] {
+.guide-steps-step[choosed="true"] .step-order{
     background-color: #237BD3;
     color: #FFFFFF;
 }
-.step-content[choosed] {
+.guide-steps-step[choosed="true"] .step-content {
     font-weight: 600;
     color: #237BD3;
 }
