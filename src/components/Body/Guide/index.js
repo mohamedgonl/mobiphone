@@ -105,9 +105,9 @@ const SlideShow = ({setStepChoosed}) => {
  
   return (
     <>
-      <a className="prev" onClick={()=>handleClickPreNext(-1)}>
+      <div className="prev" onClick={()=>handleClickPreNext(-1)}>
         &#10094;
-      </a>
+      </div>
     <div className="slide-show">
       <div className="slideshow-container">
         {guideSteps.map((e,i)=>Slide(e.img))}
@@ -118,9 +118,9 @@ const SlideShow = ({setStepChoosed}) => {
         {guideSteps.map((_, i) => Dot(i))}
       </div>
     </div>
-      <a className="next" onClick={()=>handleClickPreNext(1)}>
+      <div className="next" onClick={()=>handleClickPreNext(1)}>
         &#10095;
-      </a>
+      </div>
     </>
   );
 };
