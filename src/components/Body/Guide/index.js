@@ -2,49 +2,15 @@ import { useEffect, useState } from "react";
 import "../style.css";
 import android from "../../../images/Android.svg";
 import ios from "../../../images/Ios.svg";
-import img1 from "../../../images/img1.jpg";
-import img2 from "../../../images/img2.jpg";
-import img3 from "../../../images/img3.jpg";
-import img4 from "../../../images/img4.jpg";
-import img5 from "../../../images/img5.jpg";
+
+import {guideSteps1, guideSteps2} from './datatest'
 import "./slideshow.style.css";
 
-const slideImages = [img1,img2,img3,img4,img5,img1,img2,img3];
+var guideSteps = guideSteps1;
 
-const guideSteps = [
-  { i: 1, content: "Trong mục cài đặt (Settings), Chọn kết nối (Connection)" },
-  {
-    i: 2,
-    content:
-      "Chọn quản lý Sim (Sim card manager) và chọn thêm gói di động (Add mobile plan)",
-  },
-  {
-    i: 3,
-    content: "Chọn Thêm gói cước di động (Add mobile plan)",
-  },
-  {
-    i: 4,
-    content: "Chọn mục Thêm bằng mã QR (Add using QR code)",
-  },
-  {
-    i: 5,
-    content:
-      "Đưa camera hướng vào mã QR sao cho mã QR nằm trong đường hướng dẫn để quét",
-  },
-  {
-    i: 6,
-    content: "Khi gói di động được quét ra, chạm vào Thêm (Add) để đăng ký",
-  },
-  {
-    i: 7,
-    content: "Chạm vào OK để bật gói di động",
-  },
-  {
-    i: 8,
-    content:
-      "Kết quả: eSIM sau khi được kích hoạt sẽ xuất hiện trong mục eSIM như hình",
-  },
-];
+
+
+
 
 const Step = (i, content, choosed, setStepChoosed) => {
 
@@ -144,12 +110,12 @@ const SlideShow = ({setStepChoosed}) => {
       </a>
     <div className="slide-show">
       <div className="slideshow-container">
-        {slideImages.map((img,i)=>Slide(img))}
+        {guideSteps.map((e,i)=>Slide(e.img))}
       </div>
       <br></br>
 
       <div style={{ textAlign: "center" }}>
-        {slideImages.map((_, i) => Dot(i))}
+        {guideSteps.map((_, i) => Dot(i))}
       </div>
     </div>
       <a className="next" onClick={()=>handleClickPreNext(1)}>
@@ -168,11 +134,18 @@ const SlideShow = ({setStepChoosed}) => {
 const Guide = () => { 
   const [stepChoosed, setStepChoosed] = useState([]);
   const [os, setOs] = useState('Android');
+
   useEffect(()=>{
     let stepChoosed = new Array(guideSteps.length).fill(false);
     stepChoosed[0] = true;
     setStepChoosed(stepChoosed)
   },[])
+
+  const handleOSChange = (os) => {
+    if(os === 'Android') guideSteps = guideSteps1;
+    else guideSteps = guideSteps2;
+    setOs(os) 
+  }
 
   return (
     <div className="body-guide" id="guide">
@@ -180,8 +153,8 @@ const Guide = () => {
         <div className="guide-title">
           <h1>Hướng dẫn kích hoạt eSIM</h1>
           <ul>
-            <li choosed = {os=='Android'?'false':'true'} onClick = {()=>setOs('IOS')}>IOS</li>
-            <li choosed = {os=='Android'?'true':'false'} onClick = {()=> setOs('Android')}>ANDROID</li>
+            <li choosed = {os==='Android'?'false':'true'} onClick = {()=>handleOSChange('IOS')}>IOS</li>
+            <li choosed = {os==='Android'?'true':'false'} onClick = {()=> handleOSChange('Android')}>ANDROID</li>
           </ul>
         </div>
         <div className="guide-steps">
@@ -191,7 +164,7 @@ const Guide = () => {
                 className="guide-steps-os step-order"
                 alt="os"
                 os=""
-                src={os == 'Android' ? android: ios}
+                src={os === 'Android' ? android: ios}
               ></img>
               <div className="step-content" os="">
                 <h2>Đối với {os}</h2>
