@@ -27,6 +27,7 @@ h1{
     letter-spacing: 0px;
     text-align: left;
     color: #FFFFFF;
+    width: max-content;
 }
 
 .body-intro-content > p {  
@@ -190,11 +191,11 @@ color: #232020;
 .guide-title ul {
     display: flex;
     list-style: none;
-    margin-left: calc(120rem/16);
+    margin-left: calc(70rem/16);
     align-items: center;
 }
 .guide-title li {
-    margin-left: 20px;
+    /* margin-left: 20px; */
     margin-right: 20px;
     color: #D8D8D8;
     cursor: pointer;
@@ -364,9 +365,12 @@ color: #232020;
         padding-top: 2vh;
        
     }
-    .body-intro-content > p , li {
+    .body-intro-content > p ,  .body-intro-content >ul li {
         font-size: 14px;
         line-height: 21px;
+    }
+    .body-intro-content li {
+        list-style: inside;
     }
     .body-intro-content img {
         margin: 1rem auto auto auto;
@@ -377,7 +381,9 @@ color: #232020;
     .body-reasons-nextprev {
         display: none;
     }
-
+    .body-question {
+        padding: 3rem 2rem;
+    }
     .guide-title {
         flex-direction: column;
     }

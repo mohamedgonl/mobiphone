@@ -110,3 +110,10 @@
         font-size: 11px
     }
 }
+
+
+@media screen and (max-width: 760px) {
+    .prev, .next {
+        display: none;
+    }
+}

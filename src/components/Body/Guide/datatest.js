@@ -3,9 +3,10 @@ import img2 from "../../../images/img2.jpg";
 import img3 from "../../../images/img3.jpg";
 import img4 from "../../../images/img4.jpg";
 import img5 from "../../../images/img5.jpg";
-
+import img6 from '../../../images/img6.jpg';
+import img7 from '../../../images/img7.jpg';
 const guideSteps1 = [
-    { i: 1, content: "Android. Trong mục cài đặt (Settings), Chọn kết nối (Connection)", img: img1 },
+    { i: 1, content: "Android. Trong mục cài đặt (Settings), Chọn kết nối (Connection)", img: img6 },
     {
       i: 2,
       content:
@@ -42,7 +43,7 @@ const guideSteps1 = [
 
 
   const guideSteps2 = [
-    { i: 1, content: "IOS. Trong mục cài đặt (Settings), Chọn kết nối (Connection)", img: img1 },
+    { i: 1, content: "IOS. Trong mục cài đặt (Settings), Chọn kết nối (Connection)", img: img7 },
     {
       i: 2,
       content:
