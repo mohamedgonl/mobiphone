@@ -13,7 +13,7 @@ header {
     padding: 0 7.5vw;
     /* margin: 0em auto ; */
     display: flex;
-    /* visibility: visible; */
+    visibility: visible;
 }
 
 .header-logo {
@@ -73,7 +73,7 @@ nav a:hover {
 
     .header-container nav {
         z-index: 1;
-        visibility: visible;
+        visibility: hidden;
         position: absolute;
         top: calc(90px + 1rem);
         left: 0px;
@@ -85,12 +85,16 @@ nav a:hover {
         background-color: #ffffff; 
         border-radius: 0px 8px 8px 0px;
         padding-bottom: 90px;
-        padding-top: 32px;
+        padding-top: 12px;
     }
-    nav li {
+    .header-container nav ul {
+        text-align: left;
+    }
+    .header-container nav li {
         font-weight: 500;
         font-family: 'SF UI Display';
         margin: 0;
+        padding: 20px 24px;
     }
 
     .nav-list li:hover{

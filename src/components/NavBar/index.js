@@ -10,48 +10,52 @@ const Header = () => {
     const showMenu = () => {
         var menu = document.querySelector('.header-container nav').style;
         var body = document.querySelector('.body-content').style;
-        console.log(body);
+        // console.log({body, menu});
         if(navBarShowed) {
-            menu.visibility = 'hidden';
+            menu['visibility']= 'hidden';
             body['pointer-events'] = 'all';
             body['opacity'] = 1;
             setNavBarShowed(false);
         }
         else {
-            menu.visibility = 'visibile';
+            menu['visibility']= 'visible';
             body['pointer-events'] = 'none';
             body['opacity'] = 0.5;
             setNavBarShowed(true);
         }
+    }
+
+    const handleMobileNavigate = () => {
+        if(window.screen.width <= 760) showMenu();
     }
     return (
         <header>
             <div className='header-container'>
             
                     <div className='header-menu-mobile' onClick={showMenu}>
-                        <img src={HeaderMenu}></img>
+                        <img src={HeaderMenu} alt = 'menu'></img>
                     </div>
                     <div className='header-logo'>
                         <img src={Logo} alt='Logo'/>
                     </div>
            
                
-                <nav>
+           {<nav>
                     <ul className='nav-list'>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#'>Giới thiệu eSim</a>
+                            <a className='nav-link' href='#' onClick={()=> handleMobileNavigate()}>Giới thiệu eSim</a>
                         </li>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#guide'>Hướng dẫn kích hoạt</a>
+                            <a className='nav-link' href='#guide' onClick={()=> handleMobileNavigate()}>Hướng dẫn kích hoạt</a>
                         </li>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#'>Hướng dẫn</a>
+                            <a className='nav-link' href='#' onClick={()=> handleMobileNavigate()}>Hướng dẫn</a>
                         </li>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#questions'>Câu hỏi thường gặp</a>
+                            <a className='nav-link' href='#questions' onClick={()=> handleMobileNavigate()}>Câu hỏi thường gặp</a>
                         </li>
                     </ul>
-                </nav>
+                </nav>}     
             </div>
         </header>
     );

@@ -70,11 +70,11 @@ const Reasons = () => {
            
              
             <div className='body-reasons-reasons'>
-               <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(-350)}>
+               <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(-700)}>
                </button>
                <div className='body-reasons-list'>{reasons.map(e => Reason(e.title, e.content, e.icon))}</div>
                 
-                <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(350)}  style={{transform: 'rotate(0.5turn)'}}></button>
+                <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(700)}  style={{transform: 'rotate(0.5turn)'}}></button>
              </div>
            
           
