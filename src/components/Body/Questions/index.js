@@ -64,17 +64,24 @@ import {getData} from '../../../helpers/fetchAPI'
         },
     ]
 
-
-  const Question = (ques, ans) => {
-        const [hiddenAns, setHiddenAns] = useState(true);
+    const Question = (i,ques, ans,hidden, setHidden) => {
+        let hiddenAns = 'true';
         const showAns = () => {
-            setHiddenAns(!hiddenAns)
+            let e = document.getElementsByClassName(".question-a");
+            console.log(e);
+            let hidden
+            if(hidden == 'true') hidden = 'false';
+            else hidden = 'true'
+            e[i].setAttribute("hidden", hidden)
+            
         }
         return (
-            <div className='question-container' id='questions' show= {ques === undefined ? 'false' : 'true'}>
+            <div className='question-container' id='questions' 
+            // show= {ques === undefined ? 'false' : 'true'}
+            >
                 <div className='question-q'>
                     <input alt='show'
-                        onClick={showAns}
+                        onClick={()=>showAns()}
                         type={'image'}
                         src={button}
                         style={
@@ -85,12 +92,13 @@ import {getData} from '../../../helpers/fetchAPI'
                                 marginLeft: '1rem'
                             }
                     }></input>
-                    <p onClick={showAns}>
+                    <p>
                         {ques}</p>
                 </div>
     
                 <div className='question-a'
-                    hidden={hiddenAns}>
+                    hidden={hiddenAns}
+                    >
                     <hr></hr>
                     <h3>Trả lời</h3>
                     <p>{ans}</p>
@@ -103,57 +111,46 @@ import {getData} from '../../../helpers/fetchAPI'
 
 
 
+
 const maxQuestionPerPage = 5;
 const pageStart = 1;
 
 
 const Questions = () => {
 
-    // const [questionStatus, setQuestionStatus] = useState({questions: [], questionShowing: [], pageCount: 0})
-    const [questions, setQuestions] = useState([...questions1]);
-    const [questionShowing, setQuestionShowing] = useState([...getQuestions(pageStart, questions)]);
-    // const [questionShowing, setQuestionShowing] = useState([]);
+    const [questions, setQuestions] = useState([]);
+    const [questionShowing, setQuestionShowing] = useState([]);
     const [curPage, setCurPage] = useState(pageStart);
-    const [pageCount, setPageCount] = useState (Math.ceil(questions1.length / maxQuestionPerPage));
-  
-    console.log(questions);
+    const [pageCount, setPageCount] = useState(0)
+    const [loaded, setLoaded] = useState(false);
+    const [hidden, setHidden] = useState(true)
 
-    // useEffect(() => {
-    //     // const data = getData();
-    //     // setQuestions(data)
-    //     // setTimeout(() => {
-    //         // setQuestionStatus({
-    //         //     ...questionStatus,
-    //         //     questions: questions1,
-    //         //     pageCount: Math.ceil(questions1.length / maxQuestionPerPage),
-    //         //     questionShowing: getQuestions(pageStart, questions1)
-    //         // })
-    //         // console.log(questionStatus);
-    //     // }, 3000)
-    //     // console.log('call');
-    //     let questionaaa ;
-    //     setTimeout(() => {
-    //         questionaaa =  questions1;
-    //     }, 3000);
-    //     setQuestions(questionaaa)
-    //     console.log(questions);
-    //     setQuestionShowing(getQuestions(pageStart, questionaaa))
-    //     setPageCount(Math.ceil(questions1.length / maxQuestionPerPage))
-    // }, [])
+    useEffect(() => {
+        console.log(questions);
+        setQuestions([ ...questions1])
+        console.log(questions);
+        console.log('Before',questionShowing);
+        setQuestionShowing([...getQuestions(pageStart, questions)])
+        console.log('After',questionShowing);
+        setPageCount(Math.ceil(questions.length / maxQuestionPerPage))
+        setLoaded(true)
+        // setHidden(Array(questions.length).fill(true))
+    }, [loaded])
+
+    useEffect(() => {  
+    }, [hidden]);
 
     const navigatePage = (event, page) => {
         setCurPage(page)
-       setQuestionShowing(getQuestions(page, questions))
+        setQuestionShowing([...getQuestions(page, questions)])
     }
 
+   
 
     return (
         <div className='body-question'>
             <h1>Câu hỏi thường gặp</h1>
-            <div> {
-              questionShowing.map(e => Question(e.question, e.answer))
-            } </div>
-
+             {loaded && questionShowing.map((e,i) => Question(i,e.question, e.answer,hidden, setHidden))} 
             <div className='questions-navigate'
                 style={
                     {
@@ -162,7 +159,7 @@ const Questions = () => {
                         marginTop: '2rem'
                     }
             }>
-                <Pagination onChange={navigatePage}
+                <Pagination onChange={(e,page)=>navigatePage(e,page)}
                     count={pageCount}
                     page={curPage}
                     shape='rounded'></Pagination>
@@ -180,12 +177,12 @@ function getQuestions(page, questions) {
     for (let i = start; i <= end; i++) {
         q.push(questions[i]);
     }
-    if (q.length < maxQuestionPerPage) {
-        const remain = (maxQuestionPerPage - q.length);
-        for (let i = 1; i <= remain; i++) {
-            q.push({questions: undefined, answer: undefined});
-        }
-    }
+    // if (q.length < maxQuestionPerPage) {
+    //     const remain = (maxQuestionPerPage - q.length);
+    //     for (let i = 1; i <= remain; i++) {
+    //         q.push({questions: undefined, answer: undefined});
+    //     }
+    // }
     return q;
 }
 
