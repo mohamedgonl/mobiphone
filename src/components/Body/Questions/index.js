@@ -137,11 +137,8 @@ const Questions = () => {
   return (
     <div className="body-question">
       <h1>Câu hỏi thường gặp</h1>
-      {questionShowing.map(e => (
-        <Question ques={e.question} ans={e.answer} />
-      ))}
-      <div
-        className="questions-navigate"
+      {questionShowing.map(e => (<Question ques={e.question} ans={e.answer}/>))}
+      <div  className="questions-navigate"  
         style={{
           display: "flex",
           justifyContent: "center",

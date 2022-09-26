@@ -6,13 +6,8 @@ import ios from "../../../images/Ios.svg";
 import {guideSteps1, guideSteps2} from './datatest'
 import "./slideshow.style.css";
 
-var guideSteps = guideSteps1;
 
-
-
-
-
-const Step = (i, content, choosed, setStepChoosed) => {
+const Step = ({i, content, stepChoosed, setStepChoosed, guideSteps}) => {
 
   const chooseStep = () => {
     let stepChoosed = new Array(guideSteps.length).fill(false);
@@ -25,7 +20,7 @@ const Step = (i, content, choosed, setStepChoosed) => {
     chooseStep();
   }
   return (
-    <div className="guide-steps-step" onClick={onChangeStep} choosed={choosed?"true":"false"}>
+    <div className="guide-steps-step" onClick={onChangeStep} choosed={stepChoosed? "true":"false"}>
       <div className="step-order" >
         {i}
       </div>
@@ -67,7 +62,7 @@ const currentSlide = (n) => {
 // 
 
 //  Slideshow component
-const SlideShow = ({setStepChoosed}) => {
+const SlideShow = ({setStepChoosed, guideSteps}) => {
   
   const handleClickPreNext = (plus) => {
     plusSlides(plus)
@@ -76,10 +71,10 @@ const SlideShow = ({setStepChoosed}) => {
     setStepChoosed(stepChoosed)
   }
   
-  const Slide = (imgUrl) => {
+  const Slide = ({img}) => {
     return (
       <div className="slide fade" >
-      <img alt="Guide"  src={imgUrl} style={{ width: "100%" }}></img>
+      <img alt="Guide"  src={img} style={{ width: "100%" }}></img>
       {/* <div className="text">Caption Text {i}</div> */}
     </div>
     )
@@ -110,12 +105,12 @@ const SlideShow = ({setStepChoosed}) => {
       </div>
     <div className="slide-show">
       <div className="slideshow-container">
-        {guideSteps.map((e,i)=>Slide(e.img))}
+        {guideSteps.map((e,i)=> <Slide img = {e.img} />)}
       </div>
       <br></br>
 
       <div style={{ textAlign: "center" }}>
-        {guideSteps.map((_, i) => Dot(i))}
+        {guideSteps.map((_, i) => <Dot i={i}/>)}
       </div>
     </div>
       <div className="next" onClick={()=>handleClickPreNext(1)}>
@@ -131,19 +126,27 @@ const SlideShow = ({setStepChoosed}) => {
 
 
 // Entry Guide start
-const Guide = () => { 
+const Guide = () => {
+  const [guideSteps, setGuideSteps] = useState([]); 
   const [stepChoosed, setStepChoosed] = useState([]);
   const [os, setOs] = useState('Android');
+  const [loaded, setLoaded] = useState(false);
 
+  // CALL API 
   useEffect(()=>{
-    let stepChoosed = new Array(guideSteps.length).fill(false);
-    stepChoosed[0] = true;
-    setStepChoosed(stepChoosed)
-  },[])
+    setTimeout(() => {
+      setGuideSteps(()=>guideSteps1)
+      let stepChoosed = new Array(guideSteps.length).fill(false);
+      stepChoosed[0] = true;
+      setStepChoosed(stepChoosed)
+      setLoaded(true)
+      
+    }, 3000);
+  },[guideSteps.length, loaded])
 
   const handleOSChange = (os) => {
-    if(os === 'Android') guideSteps = guideSteps1;
-    else guideSteps = guideSteps2;
+    if(os === 'Android') setGuideSteps(guideSteps1)
+    else setGuideSteps(guideSteps2)
     setOs(os) 
   }
 
@@ -171,11 +174,10 @@ const Guide = () => {
                 <p>Lưu ý: Bật kết nối Internet trước khi thao tác</p>
               </div>
             </div>
-
-            {guideSteps.map((e,i) => Step(i+1, e.content, stepChoosed[i], setStepChoosed))}
+            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {stepChoosed[i]}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
           </div>
           <div className="guide-steps-img">
-            <SlideShow setStepChoosed = {setStepChoosed}></SlideShow>
+          { loaded && <SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
           </div>
         </div>
       </div>

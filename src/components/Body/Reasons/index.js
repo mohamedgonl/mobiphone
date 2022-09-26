@@ -1,11 +1,11 @@
 import '../style.css'
 import React from 'react';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import icon1 from '../../../images/icon1.svg'
 import icon2 from '../../../images/icon2.svg'
 import icon3 from '../../../images/icon3.svg'
 
-var reasons = [{
+var reasons11 = [{
     icon: icon1,
     title: 'Sử dụng nhiều số điện thoại trên 1 thiết bị',
     content: 'Không cần lắp đặt nhiều sim vật lý trên điện thoại.'
@@ -42,14 +42,26 @@ var reasons = [{
 }]
 
 const Reasons = () => {
+    const [reasons, setReasons] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
 
+    // CALL API
+    useEffect(() => {
+        setInterval(() => {
+            setReasons(reasons11)
+             setLoaded(true)
+        }, 3000);
+       
+    }, [loaded]);
+
+    
     const changeReasonsShowing = (i) => {
         let listReasons = document.querySelector(".body-reasons-list")
         listReasons.scrollBy({left: i, top: 0, behavior: "smooth"});
     }
     
-    const Reason = (title,content,icon) => {
+    const Reason = ({title,content,icon}) => {
         return(
             <div className='body-reasons-reason'>
                 <div className='reason-icon'>
@@ -68,14 +80,15 @@ const Reasons = () => {
                 <h1>Vì sao bạn cần sử dụng eSIM MobiFone?</h1>
             </div> 
            
-             
-            <div className='body-reasons-reasons'>
-               <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(-700)}>
-               </button>
-               <div className='body-reasons-list'>{reasons.map(e => Reason(e.title, e.content, e.icon))}</div>
-                
+             { loaded && 
+             <div className='body-reasons-reasons'>
+               <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(-700)}> </button>
+               <div className='body-reasons-list'>
+                {reasons.map(e => < Reason title = {e.title} content = {e.content} icon = {e.icon}/> )}
+                </div>
                 <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(700)}  style={{transform: 'rotate(0.5turn)'}}></button>
              </div>
+             }
            
           
         </div>

@@ -207,7 +207,7 @@ color: #232020;
 }
 .guide-steps{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .guide-steps-text {
