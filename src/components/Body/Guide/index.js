@@ -142,7 +142,7 @@ const Guide = () => {
       setLoaded(true)
       
     }, 3000);
-  },[guideSteps.length, loaded])
+  },[loaded])
 
   const handleOSChange = (os) => {
     if(os === 'Android') setGuideSteps(guideSteps1)
