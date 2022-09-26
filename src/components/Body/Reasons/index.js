@@ -88,10 +88,9 @@ const Reasons = () => {
             className="body-reasons-nextprev"
             onClick={() => changeReasonsShowing(-700)}
           >
-            {" "}
           </button>
           <div className="body-reasons-list">
-            {reasons.map((e) => (
+            {reasons.map((e,i) => (
               <Reason title={e.title} content={e.content} icon={e.icon} />
             ))}
           </div>

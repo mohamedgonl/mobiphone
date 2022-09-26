@@ -131,18 +131,23 @@ const Guide = () => {
   const [stepChoosed, setStepChoosed] = useState([]);
   const [os, setOs] = useState('Android');
   const [loaded, setLoaded] = useState(false);
-
+  const resetStepChoosed = () => {
+    let stepChoosed = new Array(guideSteps.length).fill(false);
+    stepChoosed[0] = true;
+    setStepChoosed(stepChoosed)
+    
+  }
+  
   // CALL API 
   useEffect(()=>{
     setTimeout(() => {
-      setGuideSteps(()=>guideSteps1)
-      let stepChoosed = new Array(guideSteps.length).fill(false);
-      stepChoosed[0] = true;
-      setStepChoosed(stepChoosed)
+      setGuideSteps(guideSteps1)
       setLoaded(true)
-      
+      resetStepChoosed()
     }, 3000);
-  },[guideSteps.length, loaded])
+  },[loaded])
+
+
 
   const handleOSChange = (os) => {
     if(os === 'Android') setGuideSteps(guideSteps1)

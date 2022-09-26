@@ -84,6 +84,7 @@ var questions1 = [
 
 const pageStart = 1;
 const maxQuestionPerPage = 5;
+
 const Question = ({ques, ans}) => {
   const [hidden, setHidden] = useState(true);
   return (
@@ -127,7 +128,7 @@ const Questions = () => {
         setPageCount(Math.ceil(questions.length / maxQuestionPerPage));
         setLoaded(true)
       }, 3000);
-  }, [loaded, questions]);
+  }, [loaded]);
 
   const navigatePage = (event, page) => {
     setCurPage(page);
@@ -137,7 +138,7 @@ const Questions = () => {
   return (
    loaded && <div className="body-question">
       <h1>Câu hỏi thường gặp</h1>
-      {questionShowing.map(e => (<Question ques={e.question} ans={e.answer}/>))}
+      {questionShowing.map((e,i) => (<Question ques={e.question} ans={e.answer}/>))}
       <div  className="questions-navigate"  
       >
         <Pagination
