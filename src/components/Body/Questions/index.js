@@ -135,15 +135,10 @@ const Questions = () => {
   };
 
   return (
-    <div className="body-question">
+   loaded && <div className="body-question">
       <h1>Câu hỏi thường gặp</h1>
       {questionShowing.map(e => (<Question ques={e.question} ans={e.answer}/>))}
       <div  className="questions-navigate"  
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "2rem",
-        }}
       >
         <Pagination
           onChange={(e, page) => navigatePage(e, page)}
@@ -159,9 +154,7 @@ const Questions = () => {
 function getQuestions(page, questions) {
   let start = (page - 1) * maxQuestionPerPage;
   let end =
-    start + maxQuestionPerPage - 1 >= questions.length
-      ? questions.length
-      : start + maxQuestionPerPage;
+    start + maxQuestionPerPage - 1 >= questions.length ? questions.length  : start + maxQuestionPerPage;
   end--;
   let q = [];
   for (let i = start; i <= end; i++) {

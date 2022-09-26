@@ -55,7 +55,7 @@ const Reasons = () => {
        
     }, [loaded]);
 
-    
+
     const changeReasonsShowing = (i) => {
         let listReasons = document.querySelector(".body-reasons-list")
         listReasons.scrollBy({left: i, top: 0, behavior: "smooth"});
@@ -75,12 +75,12 @@ const Reasons = () => {
         )
     }
     return (
-        <div className='body-reasons' >
+      loaded &&  <div className='body-reasons' >
             <div className='body-reasons-header'>
                 <h1>Vì sao bạn cần sử dụng eSIM MobiFone?</h1>
             </div> 
            
-             { loaded && 
+             
              <div className='body-reasons-reasons'>
                <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(-700)}> </button>
                <div className='body-reasons-list'>
@@ -88,7 +88,7 @@ const Reasons = () => {
                 </div>
                 <button className='body-reasons-nextprev' onClick={()=>changeReasonsShowing(700)}  style={{transform: 'rotate(0.5turn)'}}></button>
              </div>
-             }
+             
            
           
         </div>
