@@ -297,7 +297,7 @@ color: #232020;
 .question-container {
 
     /* width: calc(856rem/16); */
-    width: 100%;
+    width: 70%;
     border-radius: 8px;
     background: #FFFFFF;
     border: 1px solid #E0E0E0;
@@ -349,6 +349,14 @@ color: #232020;
     line-height: calc(27rem/16);
     color: #232020;
 }
+.questions-navigate {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    width: 70%
+}
+
+
 @media screen and (max-width: 760px) {
 
     .body-intro .pc {
@@ -406,6 +414,12 @@ color: #232020;
     }
     .guide-steps-img {
         align-self: center;
+    }
+    .question-container {
+        width: 100%;
+    }
+    .questions-navigate {
+        width: 100%;
     }
 }
 

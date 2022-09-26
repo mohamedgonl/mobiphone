@@ -80,7 +80,7 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
     )
   };
   
-  const Dot = (i) => {
+  const Dot = ({i}) => {
     const onChangeDot = () => {
       currentSlide(i+1);
       let stepChoosed = new Array(guideSteps.length).fill(false);
@@ -151,7 +151,7 @@ const Guide = () => {
   }
 
   return (
-    <div className="body-guide" id="guide">
+    loaded && <div className="body-guide" id="guide">
       <div className="body-guide-container">
         <div className="guide-title">
           <h1>Hướng dẫn kích hoạt eSIM</h1>
@@ -177,7 +177,7 @@ const Guide = () => {
             {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {stepChoosed[i]}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
           </div>
           <div className="guide-steps-img">
-          { loaded && <SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
+          { <SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
           </div>
         </div>
       </div>
