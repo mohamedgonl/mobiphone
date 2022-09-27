@@ -2,25 +2,18 @@ import { useEffect, useState } from "react";
 import "../style.css";
 import android from "../../../images/Android.svg";
 import ios from "../../../images/Ios.svg";
-
 import {guideSteps1, guideSteps2} from './datatest'
 import "./slideshow.style.css";
 
 
-const Step = ({i, content, stepChoosed, setStepChoosed, guideSteps}) => {
-
-  const chooseStep = () => {
-    let stepChoosed = new Array(guideSteps.length).fill(false);
-    stepChoosed[i-1] = true;
-    setStepChoosed(stepChoosed)
-  }
+const Step = ({i, content, stepChoosed, setStepChoosed}) => {
 
   const onChangeStep = () => {
     currentSlide(i);
-    chooseStep();
+    setStepChoosed(i); 
   }
   return (
-    <div className="guide-steps-step" onClick={onChangeStep} choosed={stepChoosed? "true":"false"}>
+    <div className="guide-steps-step" onClick={()=>onChangeStep()} choosed={stepChoosed? "true":"false"}>
       <div className="step-order" >
         {i}
       </div>
@@ -63,12 +56,17 @@ const currentSlide = (n) => {
 
 //  Slideshow component
 const SlideShow = ({setStepChoosed, guideSteps}) => {
-  
+
+
+    useEffect(()=>{
+      slideIndex = 1
+      showSlide(1)
+      console.log('call slideshow - effect');
+    }, [guideSteps])
+
   const handleClickPreNext = (plus) => {
     plusSlides(plus)
-    let stepChoosed = new Array(guideSteps.length).fill(false);
-    stepChoosed[slideIndex-1] = true;
-    setStepChoosed(stepChoosed)
+    setStepChoosed(slideIndex)
   }
   
   const Slide = ({img}) => {
@@ -83,21 +81,13 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
   const Dot = ({i}) => {
     const onChangeDot = () => {
       currentSlide(i+1);
-      let stepChoosed = new Array(guideSteps.length).fill(false);
-      stepChoosed[i] = true;
-      setStepChoosed(stepChoosed)
+      setStepChoosed(i+1)
     }
     return (
       <span className="dot" onClick={()=>onChangeDot()}></span>
       );
     };
     
-    
-    useEffect(()=>{
-      showSlide(1)
-    })
-    
- 
   return (
     <>
       <div className="prev" onClick={()=>handleClickPreNext(-1)}>
@@ -128,26 +118,26 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
 // Entry Guide start
 const Guide = () => {
   const [guideSteps, setGuideSteps] = useState([]); 
-  const [stepChoosed, setStepChoosed] = useState([]);
+  const [stepChoosed, setStepChoosed] = useState(1);
   const [os, setOs] = useState('Android');
   const [loaded, setLoaded] = useState(false);
-  const resetStepChoosed = () => {
-    let stepChoosed = new Array(guideSteps.length).fill(false);
-    stepChoosed[0] = true;
-    setStepChoosed(stepChoosed)
-    
-  }
+
   
   // CALL API 
   useEffect(()=>{
     setTimeout(() => {
       setGuideSteps(guideSteps1)
       setLoaded(true)
-      resetStepChoosed()
-    }, 3000);
+    }, 1000);
+    console.log('call guide - effect 1');
   },[loaded])
 
 
+  // reset step choosed when switch os
+  useEffect(() => {
+    setStepChoosed(1);
+    console.log('call guide - effect 2');
+  }, [os]);
 
   const handleOSChange = (os) => {
     if(os === 'Android') setGuideSteps(guideSteps1)
@@ -179,10 +169,10 @@ const Guide = () => {
                 <p>Lưu ý: Bật kết nối Internet trước khi thao tác</p>
               </div>
             </div>
-            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {stepChoosed[i]}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
+            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {i+1 === stepChoosed ? true : false}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
           </div>
           <div className="guide-steps-img">
-          { <SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
+          {<SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
           </div>
         </div>
       </div>
