@@ -26,7 +26,10 @@ const Header = () => {
     }
 
     const handleMobileNavigate = () => {
-        if(window.screen.width <= 760) showMenu();
+        if(window.screen.width < 761) {
+            console.log('call');
+            showMenu();
+        } 
     }
     return (
         <header>

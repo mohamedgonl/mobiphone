@@ -279,7 +279,7 @@ color: #232020;
 .guide-steps-img {
 
     width: calc(358rem/16);
-    height: calc(680rem/16);
+    /* height: calc(680rem/16); */
     display: flex;
     align-items: center;
     /* background-color: #E0E0E0; */
