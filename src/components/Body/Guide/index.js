@@ -9,13 +9,11 @@ import "./slideshow.style.css";
 const Step = ({i, content, stepChoosed, setStepChoosed}) => {
 
   const onChangeStep = () => {
-    console.log('1 c',stepChoosed);
-    setStepChoosed(()=>i); 
-    console.log('2 c', stepChoosed);
+    setStepChoosed(i); 
     currentSlide(i);
   }
   return (
-    <div className="guide-steps-step" onClick={()=>onChangeStep()} choosed={stepChoosed? "true":"false"}>
+    <div className="guide-steps-step" onClick={()=>onChangeStep()} choosed={stepChoosed === i ? "true":"false"}>
       <div className="step-order" >
         {i}
       </div>
@@ -57,15 +55,16 @@ const currentSlide = (n) => {
 // 
 
 //  Slideshow component
-const SlideShow = ({setStepChoosed, guideSteps}) => {
+const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
 
 
     useEffect(()=>{
-      // slideIndex = 1
-      // showSlide(1)
       currentSlide(1)
-      console.log('call slideshow - effect');
     }, [guideSteps])
+
+    useEffect(()=>{
+      currentSlide(stepChoosed)
+    },[stepChoosed])
 
   const handleClickPreNext = (plus) => {
     plusSlides(plus)
@@ -73,9 +72,10 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
   }
   
   const Slide = ({img}) => {
+    
     return (
       <div className="slide fade" >
-      <img src={img} style={{ width: "100%" }}></img>
+      <img alt="guide" src={img} style={{ width: "100%" }}></img>
       {/* <div className="text">Caption Text {i}</div> */}
     </div>
     )
@@ -142,11 +142,7 @@ const Guide = () => {
     console.log('call guide - effect 2');
   }, [os]);
 
-  useEffect(()=>{
-    console.log('step choosed changed');
-    console.log(stepChoosed);
-  },[stepChoosed])
-  
+
   const handleOSChange = (os) => {
     if(os === 'Android') setGuideSteps(guideSteps1)
     else setGuideSteps(guideSteps2)
@@ -178,11 +174,11 @@ const Guide = () => {
               </div>
             </div>
             <div>
-            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {i+1 === stepChoosed ? true : false}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
+            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {stepChoosed}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
             </div>
           </div>
           <div className="guide-steps-img">
-          {<SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
+          {<SlideShow stepChoosed={stepChoosed} setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
           </div>
         </div>
       </div>
