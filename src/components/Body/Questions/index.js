@@ -87,6 +87,11 @@ const maxQuestionPerPage = 5;
 
 const Question = ({ques, ans}) => {
   const [hidden, setHidden] = useState(true);
+
+  useEffect(()=>{
+    setHidden(true)
+  },[ques,ans])
+  
   return (
     <div className="question-container" id="questions">
       <div className="question-q">

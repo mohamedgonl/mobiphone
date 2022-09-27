@@ -9,8 +9,10 @@ import "./slideshow.style.css";
 const Step = ({i, content, stepChoosed, setStepChoosed}) => {
 
   const onChangeStep = () => {
+    console.log('1 c',stepChoosed);
+    setStepChoosed(()=>i); 
+    console.log('2 c', stepChoosed);
     currentSlide(i);
-    setStepChoosed(i); 
   }
   return (
     <div className="guide-steps-step" onClick={()=>onChangeStep()} choosed={stepChoosed? "true":"false"}>
@@ -30,8 +32,8 @@ var slideIndex = 1;
 const showSlide = (n) => {
   let dots = document.querySelectorAll(".dot")
   let slides = document.querySelectorAll(".slide")
-
-  if(slides.length && dots.length) {
+  console.log({dots, slides});
+  // if(slides.length && dots.length) {
     if (n > slides.length) {slideIndex = 1} 
     if (n < 1) {slideIndex = slides.length}
     for (let i = 0; i < slides.length; i++) {
@@ -42,7 +44,7 @@ const showSlide = (n) => {
     }
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
-  }
+  // }
 };
 
 const plusSlides = (n) => {
@@ -59,8 +61,9 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
 
 
     useEffect(()=>{
-      slideIndex = 1
-      showSlide(1)
+      // slideIndex = 1
+      // showSlide(1)
+      currentSlide(1)
       console.log('call slideshow - effect');
     }, [guideSteps])
 
@@ -72,7 +75,7 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
   const Slide = ({img}) => {
     return (
       <div className="slide fade" >
-      <img alt="Guide"  src={img} style={{ width: "100%" }}></img>
+      <img src={img} style={{ width: "100%" }}></img>
       {/* <div className="text">Caption Text {i}</div> */}
     </div>
     )
@@ -95,7 +98,7 @@ const SlideShow = ({setStepChoosed, guideSteps}) => {
       </div>
     <div className="slide-show">
       <div className="slideshow-container">
-        {guideSteps.map((e,i)=> <Slide img = {e.img} />)}
+        {guideSteps.map((e)=> <Slide img = {e.img} />)}
       </div>
       <br></br>
 
@@ -139,6 +142,11 @@ const Guide = () => {
     console.log('call guide - effect 2');
   }, [os]);
 
+  useEffect(()=>{
+    console.log('step choosed changed');
+    console.log(stepChoosed);
+  },[stepChoosed])
+  
   const handleOSChange = (os) => {
     if(os === 'Android') setGuideSteps(guideSteps1)
     else setGuideSteps(guideSteps2)
@@ -169,7 +177,9 @@ const Guide = () => {
                 <p>Lưu ý: Bật kết nối Internet trước khi thao tác</p>
               </div>
             </div>
+            <div>
             {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {i+1 === stepChoosed ? true : false}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
+            </div>
           </div>
           <div className="guide-steps-img">
           {<SlideShow setStepChoosed = {setStepChoosed} guideSteps={guideSteps}></SlideShow>}  
