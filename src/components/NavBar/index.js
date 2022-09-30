@@ -52,9 +52,6 @@ const Header = () => {
                             <a className='nav-link' href='#guide' onClick={()=> handleMobileNavigate()}>Hướng dẫn kích hoạt</a>
                         </li>
                         <li className='nav-list-item'>
-                            <a className='nav-link' href='#' onClick={()=> handleMobileNavigate()}>Hướng dẫn</a>
-                        </li>
-                        <li className='nav-list-item'>
                             <a className='nav-link' href='#questions' onClick={()=> handleMobileNavigate()}>Câu hỏi thường gặp</a>
                         </li>
                     </ul>

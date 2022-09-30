@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'SF UI Display';   /*Can be any text*/
+    src: url('./fonts/Font\ Website\ eSIM\ MobiFone/SF\ UI\ Display/SF-UI-Display-Regular.otf')format('truetype')
+  }
+
+  @font-face {
+    font-family: 'SF UI Text';   /*Can be any text*/
+    src: url('./fonts/Font\ Website\ eSIM\ MobiFone/SF\ UI\ Display/SF-UI-Text-Regular.otf')format('truetype')
+  }
+
 *{
     box-sizing: border-box;
     margin: 0;
