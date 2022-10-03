@@ -55,8 +55,7 @@ const currentSlide = (n) => {
 
 //  Slideshow component
 const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
-
-
+  console.log(guideSteps);
     useEffect(()=>{
       currentSlide(1)
     }, [guideSteps])
@@ -133,10 +132,6 @@ const Guide = ({data}) => {
   useEffect(() => {
     setStepChoosed(1);
   }, [os]);
-  
-  useEffect(() => {
-    showSlide(1)
-  }, []);
   
   const handleOSChange = (os) => {
     if(os === 'Android') setGuideSteps(guides.Android);
