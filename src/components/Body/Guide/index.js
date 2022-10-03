@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "../style.css";
 import android from "../../../images/Android.svg";
 import ios from "../../../images/Ios.svg";
-import {guideSteps1, guideSteps2} from './datatest'
 import "./slideshow.style.css";
 
 
@@ -30,7 +29,7 @@ var slideIndex = 1;
 const showSlide = (n) => {
   let dots = document.querySelectorAll(".dot")
   let slides = document.querySelectorAll(".slide")
-  console.log({dots, slides});
+  // console.log({dots, slides});
   // if(slides.length && dots.length) {
     if (n > slides.length) {slideIndex = 1} 
     if (n < 1) {slideIndex = slides.length}
@@ -56,8 +55,7 @@ const currentSlide = (n) => {
 
 //  Slideshow component
 const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
-
-
+  console.log(guideSteps);
     useEffect(()=>{
       currentSlide(1)
     }, [guideSteps])
@@ -98,7 +96,7 @@ const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
       </div>
     <div className="slide-show">
       <div className="slideshow-container">
-        {guideSteps.map((e)=> <Slide img = {e.img} />)}
+        {guideSteps.map((e)=> <Slide img = {e.image} />)}
       </div>
       <br></br>
 
@@ -119,38 +117,31 @@ const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
 
 
 // Entry Guide start
-const Guide = () => {
-  const [guideSteps, setGuideSteps] = useState([]); 
+const Guide = ({data}) => {
+
+  const guides = {
+    IOS: [...data["1"]],
+    Android: [...data["2"]]
+  }
+  const [guideSteps, setGuideSteps] = useState([...guides.Android]); 
   const [stepChoosed, setStepChoosed] = useState(1);
   const [os, setOs] = useState('Android');
-  const [loaded, setLoaded] = useState(false);
-
-  
-  // CALL API 
-  useEffect(()=>{
-    setTimeout(() => {
-      setGuideSteps(guideSteps1)
-      setLoaded(true)
-    }, 1000);
-    console.log('call guide - effect 1');
-  },[loaded])
 
 
   // reset step choosed when switch os
   useEffect(() => {
     setStepChoosed(1);
-    console.log('call guide - effect 2');
   }, [os]);
-
-
+  
+  
   const handleOSChange = (os) => {
-    if(os === 'Android') setGuideSteps(guideSteps1)
-    else setGuideSteps(guideSteps2)
-    setOs(os) 
+    if(os === 'Android') setGuideSteps(guides.Android);
+    else setGuideSteps(guides.IOS);
+    setOs(os) ;
   }
 
   return (
-    loaded && <div className="body-guide" id="guide">
+    <div className="body-guide" id="guide">
       <div className="body-guide-container">
         <div className="guide-title">
           <h1>Hướng dẫn kích hoạt eSIM</h1>
@@ -174,7 +165,7 @@ const Guide = () => {
               </div>
             </div>
             <div>
-            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.content} stepChoosed = {stepChoosed}  guideSteps={guideSteps}  setStepChoosed = {setStepChoosed}/>) }
+            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.title} stepChoosed = {stepChoosed}   setStepChoosed = {setStepChoosed}/>) }
             </div>
           </div>
           <div className="guide-steps-img">
