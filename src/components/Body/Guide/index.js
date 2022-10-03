@@ -55,7 +55,7 @@ const currentSlide = (n) => {
 
 //  Slideshow component
 const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
-  console.log(guideSteps);
+
     useEffect(()=>{
       currentSlide(1)
     }, [guideSteps])
@@ -118,15 +118,19 @@ const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
 
 // Entry Guide start
 const Guide = ({data}) => {
-
   const guides = {
     IOS: [...data["1"]],
     Android: [...data["2"]]
   }
-  const [guideSteps, setGuideSteps] = useState([...guides.Android]); 
-  const [stepChoosed, setStepChoosed] = useState(1);
-  const [os, setOs] = useState('Android');
+  const [guideSteps, setGuideSteps] = useState([]); 
+  const [stepChoosed, setStepChoosed] = useState(0);
+  const [os, setOs] = useState('');
 
+  useEffect(() => {
+    setGuideSteps([...guides.Android])
+    setStepChoosed(1)
+    setOs('Android')
+  }, [data]);
 
   // reset step choosed when switch os
   useEffect(() => {
@@ -140,7 +144,7 @@ const Guide = ({data}) => {
   }
 
   return (
-    <div className="body-guide" id="guide">
+ stepChoosed &&   <div className="body-guide" id="guide">
       <div className="body-guide-container">
         <div className="guide-title">
           <h1>Hướng dẫn kích hoạt eSIM</h1>
