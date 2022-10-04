@@ -96,12 +96,12 @@ const SlideShow = ({stepChoosed, setStepChoosed, guideSteps}) => {
       </div>
     <div className="slide-show">
       <div className="slideshow-container">
-        {guideSteps.map((e)=> <Slide img = {e.image} />)}
+        {guideSteps.map((e,i)=> <Slide key={i} img = {e.image} />)}
       </div>
       <br></br>
 
       <div style={{ textAlign: "center" }}>
-        {guideSteps.map((_, i) => <Dot i={i}/>)}
+        {guideSteps.map((_, i) => <Dot key={i} i={i}/>)}
       </div>
     </div>
       <div className="next" onClick={()=>handleClickPreNext(1)}>
@@ -168,7 +168,7 @@ const Guide = ({data}) => {
               </div>
             </div>
             <div>
-            {guideSteps.map((e,i) => <Step i ={i+1} content = {e.title} stepChoosed = {stepChoosed}   setStepChoosed = {setStepChoosed}/>) }
+            {guideSteps.map((e,i) => <Step key={i} i ={i+1} content = {e.title} stepChoosed = {stepChoosed}   setStepChoosed = {setStepChoosed}/>) }
             </div>
           </div>
           <div className="guide-steps-img">
