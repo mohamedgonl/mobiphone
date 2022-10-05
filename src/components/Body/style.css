@@ -142,18 +142,18 @@ h1{
     height: 1px;
 }
 
-.reason-content  span {
-    /* font-style: normal;
-    font-weight: 600; */
-    font-size: calc(24rem/16) !important;
-    /* line-height: 150%;
+.reason-content-title {
+    font-style: normal ;
+    font-weight: 600 ;
+    font-size: calc(24rem/16) ;
+    line-height: 150%;
     color: #0A4874;
     padding-left: 4px;
     padding-right: 4px;
+    height: calc(68rem/16);
     text-align: center;
-    height: calc(68rem/16); */
-    overflow: hidden
-    
+    margin-top: -2rem;
+    overflow: hidden  
 }
 .reason-content-main {
     text-align: left;
@@ -161,10 +161,7 @@ h1{
     font-weight: 400;
     font-size: calc(18rem/16);
     line-height: 150%;
-    /* or 150% */
-
-
-color: #232020;
+    color: #232020;
 }
 
 

@@ -1,27 +1,29 @@
 import "../style.css";
 import React from "react";
 import { useState} from "react";
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 
 
 
 
 const Reasons = ({data}) => {
-  const [reasons] = useState([...data]);
+  const [reasons] = useState([...data,]);
   const changeReasonsShowing = (i) => {
     let listReasons = document.querySelector(".body-reasons-list");
     let move =i*listReasons.clientWidth;
     listReasons.scrollBy({ left: move, top: 0, behavior: "smooth" });
   };
 
-  const Reason = ({ description, icon }) => {
+  const Reason = ({ title, content, icon }) => {
     return (
       <div className="body-reasons-reason">
         <div className="reason-icon">
           <img alt="icon" src={icon}></img>
         </div>
         <div className="reason-content">
-          {parse(description)}
+          <div className="reason-content-title">{title}</div>
+          <hr></hr>
+          <div className="reason-content-main">{content}</div>
         </div>
       </div>
     );
@@ -41,7 +43,7 @@ const Reasons = ({data}) => {
           </button>
           <div className="body-reasons-list">
             {reasons.map((e,i) => (
-              <Reason key={i} description={e.description} icon={e.icon} />
+              <Reason key={i} title = {e.title1} content={e.title2} icon={e.icon} />
             ))}
           </div>
           <button
