@@ -3,24 +3,25 @@ import React from "react";
 import { useState} from "react";
 import parse from 'html-react-parser';
 
+
+
+
 const Reasons = ({data}) => {
   const [reasons] = useState([...data]);
   const changeReasonsShowing = (i) => {
     let listReasons = document.querySelector(".body-reasons-list");
-    listReasons.scrollBy({ left: i, top: 0, behavior: "smooth" });
+    let move =i*listReasons.clientWidth;
+    listReasons.scrollBy({ left: move, top: 0, behavior: "smooth" });
   };
 
-  const Reason = ({ title, content, icon }) => {
+  const Reason = ({ description, icon }) => {
     return (
       <div className="body-reasons-reason">
         <div className="reason-icon">
           <img alt="icon" src={icon}></img>
         </div>
         <div className="reason-content">
-          {/* <div className="reason-content-title">{parse(title)}</div> */}
-          {/* <hr></hr>
-          <p className="reason-content-main">{content}</p> */}
-          {parse(title)}
+          {parse(description)}
         </div>
       </div>
     );
@@ -35,17 +36,17 @@ const Reasons = ({data}) => {
         <div className="body-reasons-reasons">
           <button
             className="body-reasons-nextprev"
-            onClick={() => changeReasonsShowing(-700)}
+            onClick={() => changeReasonsShowing(-1)}
           >
           </button>
           <div className="body-reasons-list">
             {reasons.map((e,i) => (
-              <Reason key={i} title={e.description} content={e.content} icon={e.icon} />
+              <Reason key={i} description={e.description} icon={e.icon} />
             ))}
           </div>
           <button
             className="body-reasons-nextprev"
-            onClick={() => changeReasonsShowing(700)}
+            onClick={() => changeReasonsShowing(1)}
             style={{ transform: "rotate(0.5turn)" }}
           ></button>
         </div>
