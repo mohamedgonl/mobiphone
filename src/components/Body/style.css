@@ -142,16 +142,16 @@ h1{
     height: 1px;
 }
 
-.reason-content-title {
-    font-style: normal;
-    font-weight: 600;
-    font-size: calc(24rem/16);
-    line-height: 150%;
+.reason-content  span {
+    /* font-style: normal;
+    font-weight: 600; */
+    font-size: calc(24rem/16) !important;
+    /* line-height: 150%;
     color: #0A4874;
     padding-left: 4px;
     padding-right: 4px;
     text-align: center;
-    height: calc(68rem/16);
+    height: calc(68rem/16); */
     overflow: hidden
     
 }
